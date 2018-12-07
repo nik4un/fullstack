@@ -33,7 +33,7 @@ module.exports.update = async (req, res) => {
       // в функцию findOneAndUpdate необходимо передать три параметра
       { _id: req.params.id }, // id в БД
       { $set: req.body }, // изменить запись в БД на значения из запроса
-      { new: true }, // здесь true - чтобы вернулись обновленные значения, false - старые
+      { new: true }, // здесь true - возвращаются обновленные значения, false - старые
     );
     res.status(200).json(positions);
   } catch (e) {

@@ -14,5 +14,4 @@ router.post('/', passport.authenticate('jwt',
 router.patch('/:id', passport.authenticate('jwt',
   { session: false }), upload.single('image'), controller.update);
 
-
 module.exports = router;

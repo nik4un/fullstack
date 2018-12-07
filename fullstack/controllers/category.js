@@ -36,7 +36,6 @@ module.exports.remove = async (req, res) => {
 };
 
 module.exports.create = async (req, res) => {
-  console.log('user:', req.user);
   const category = new Category({
     name: req.body.name,
     // req.user._id будет только в том случае, если перед этим контроллером в цепочке стоит passport
