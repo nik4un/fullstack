@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthServices } from '../shared/services/auth.services';
 import { User } from '../shared/interfaces';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { log } from 'util';
 
 @Component({
   selector: 'app-login-page',
@@ -60,7 +61,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.authSubscribe =  this.auth.login(user).subscribe(
       () => {
         // редирект на нужную страницу при успешном логине
-        this.router.navigate(['/overview']);
+        console.log('Redirect');
+        // this.router.navigate(['/overview']);
       },
       error => {
         console.warn(error);

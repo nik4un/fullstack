@@ -5,7 +5,7 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
-import { AuthGuard } from './shared/Guards/auth.guard';
+import { AuthGuard } from './shared/classes/auth.guard';
 
 const routes: Routes = [
   {
