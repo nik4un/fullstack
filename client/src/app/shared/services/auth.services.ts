@@ -15,7 +15,9 @@ export class AuthServices {
 
   constructor(private http: HttpClient) {}
 
-  registration() {}
+  registration(user: User): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>('/api/auth/registration', user);
+  }
 
   // метод возвращает объект Observable, у которого есть поле token
   login(user: User): Observable<{ token: string }> {

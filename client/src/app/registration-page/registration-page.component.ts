@@ -1,15 +1,64 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { User } from '../shared/interfaces';
+import { AuthServices } from '../shared/services/auth.services';
 
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.css']
 })
-export class RegistrationPageComponent implements OnInit {
+export class RegistrationPageComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  form: FormGroup;
+  authSubscribe: Subscription;
+
+  constructor(
+    private auth: AuthServices,
+    private router: Router,
+    private  route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      'email': new FormControl(
+        null,
+        [Validators.required, Validators.email]),
+      'password': new FormControl(
+        null,
+        [Validators.required, Validators.minLength(6)]
+      )
+    });
   }
 
+  ngOnDestroy() {
+    // отписываемся от подписок
+    if (this.authSubscribe) {
+      this.authSubscribe.unsubscribe();
+    }
+  }
+
+  submit() {
+    const user: User  = {
+      email: this.form.value.email,
+      password: this.form.value.password
+    };
+    this.form.disable(); // отключам кнопку отправки формы  на время обработки запроса
+    // присваиваем подписку переменной, чтобы при редиректе отписаться и леквидировать утечку памяти
+    this.authSubscribe =  this.auth.registration(user).subscribe(
+      () => {
+        // редирект на нужную страницу при успешном логине
+        this.router.navigate(['/login'], {queryParams: {
+          registered: true
+          }});
+        console.log('Registration success');
+      },
+      error => {
+        console.warn('Warning:', error); // Сообщение об ошибке здесь: error.error.message
+        this.form.enable(); // включаем кнопку отправки формы при ошибке запроса
+      }
+    );
+  }
 }

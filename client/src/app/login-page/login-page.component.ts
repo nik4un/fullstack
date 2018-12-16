@@ -32,7 +32,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     });
 
     this.paramsSubscribe = this.route.queryParams.subscribe((params: Params) => {
-      if (params['registred']) {
+      if (params['registered']) {
         // Теперь вы можете войти в систему, используя свои данные
       } else if (params['accessDenied']) {
         // Для работы вам необходимо авторизоваться
@@ -60,8 +60,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.authSubscribe =  this.auth.login(user).subscribe(
       () => {
         // редирект на нужную страницу при успешном логине
-        // this.router.navigate(['/overview']);
-        console.log('Login success');
+        this.router.navigate(['/overview']);
       },
       error => {
         console.warn(error);

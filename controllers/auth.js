@@ -35,7 +35,7 @@ module.exports.login = async (req, res) => {
   }
 };
 
-module.exports.register = async (req, res) => {
+module.exports.registration = async (req, res) => {
   const candidate = await User.findOne({ email: req.body.email });
   if (candidate) {
     // Пользователь с полученным email существует, нужно об этом сообщить
