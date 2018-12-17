@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../shared/interfaces';
 import { AuthServices } from '../shared/services/auth.services';
+import { MaterialService } from '../shared/classes/material.service';
 
 @Component({
   selector: 'app-registration-page',
@@ -56,7 +57,7 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
         console.log('Registration success');
       },
       error => {
-        console.warn('Warning:', error); // Сообщение об ошибке здесь: error.error.message
+        MaterialService.toast(error.error.message);
         this.form.enable(); // включаем кнопку отправки формы при ошибке запроса
       }
     );

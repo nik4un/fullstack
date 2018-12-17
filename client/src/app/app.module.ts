@@ -30,7 +30,7 @@ import { TokenInterceptor } from './shared/classes/token.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
-      useClass:TokenInterceptor
+      useClass: TokenInterceptor
     }
   ],
   bootstrap: [AppComponent]

@@ -13,9 +13,10 @@ import { AuthServices } from '../services/auth.services';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-  constructor(private auth: AuthServices, private router: Router) {};
+  constructor(private auth: AuthServices, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean
+    | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.auth.isAuthenticated()) {
       return of(true);
     } else {
@@ -23,11 +24,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         queryParams: {
           accessDenied: true
         }
-      })
+      });
     }
   }
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+    Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.canActivate(childRoute, state);
   }
 }
