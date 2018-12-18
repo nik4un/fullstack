@@ -3,7 +3,6 @@
   <li *ngFor="let link of links"
     class="bold"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
   >
     <a [routerLink]="[link.url]" class="waves-effect waves-orange">
       {{ link.name }}
@@ -25,7 +24,15 @@
     <i class="large material-icons">add</i>
   </a>
   <ul>
-    <li><a class="btn-floating green"><i class="material-icons">assignment</i></a></li>
-    <li><a class="btn-floating blue"><i class="material-icons">list</i></a></li>
+    <li>
+      <a class="btn-floating green" routerLink="/order">
+        <i class="material-icons">assignment</i>
+      </a>
+    </li>
+    <li>
+      <a class="btn-floating blue" routerLink="/categories/new">
+        <i class="material-icons">list</i>
+      </a>
+    </li>
   </ul>
 </div>
