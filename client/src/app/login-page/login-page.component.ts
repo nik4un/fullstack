@@ -64,7 +64,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       () => {
         // редирект на нужную страницу при успешном логине
         console.log('Redirect');
-        // this.router.navigate(['/overview']);
+        this.router.navigate(['/overview']);
       },
       error => {
         MaterialService.toast(error.error.message);
