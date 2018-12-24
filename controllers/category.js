@@ -28,7 +28,7 @@ module.exports.remove = async (req, res) => {
     // удаляем все позиции этой категории
     await Position.remove({ category: req.params.id });
     res.status(200).json({
-      message: 'Категория удалена.',
+      message: 'Категория удалена',
     });
   } catch (e) {
     errorHandler(res, e);
@@ -53,14 +53,15 @@ module.exports.create = async (req, res) => {
 };
 
 module.exports.update = async (req, res) => {
+  const updatedCategory = {
+    name: req.body.name,
+  };
+
+  if (req.file) { // req.file формирует middleware "upload"
+    updatedCategory.imageSrc = req.file.path;
+  }
   try {
-    const updatedCategory = {
-      name: req.body.name,
-    };
-    if (req.file) { // req.file формирует middleware "upload"
-      updatedCategory.imageSrc = req.file.path;
-    }
-    const category = await Position.findOneAndUpdate(
+    const category = await Category.findOneAndUpdate(
       // в функцию findOneAndUpdate необходимо передать три параметра
       { _id: req.params.id }, // id в БД
       { $set: updatedCategory }, // изменить запись в БД на измененные значения
