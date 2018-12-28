@@ -14,3 +14,16 @@ export interface Category {
   _id?: string;
 }
 
+export interface Position {
+  name: string;
+  cost: Number;
+  category: string;
+  user?: string;
+  _id?: string;
+}
+
+export interface ModalInstance {
+  open?(): void;
+  close?(): void;
+  destroy?(): void;
+}

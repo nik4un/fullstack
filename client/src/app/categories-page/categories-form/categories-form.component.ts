@@ -49,7 +49,7 @@ export class CategoriesFormComponent implements OnInit {
               name: category.name
             });
             this.imagePreview = category.imageSrc;
-            MaterialService.updateTextImput(); // имитируем реальный ввод текста
+            MaterialService.updateTextInput(); // имитируем реальный ввод текста
           }
           this.form.enable();
         },

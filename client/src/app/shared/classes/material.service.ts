@@ -1,4 +1,5 @@
 import { ElementRef } from '@angular/core';
+import { ModalInstance } from '../interfaces';
 
 declare var M;
 
@@ -11,7 +12,12 @@ export class MaterialService {
     M.FloatingActionButton.init(ref.nativeElement);
   }
 
-  static updateTextImput() {
+  static updateTextInput() {
     M.updateTextFields();
   }
+
+  static initModal(elem): ModalInstance {
+    return M.Modal.init(elem);
+  }
 }
+

@@ -19,7 +19,7 @@ module.exports.create = async (req, res) => {
       name: req.body.name,
       cost: req.body.cost,
       category: req.body.category,
-      user: req.use.id,
+      user: req.user.id,
     }).save();
     res.status(201).json(positions); // 201 Created
   } catch (e) {
@@ -45,7 +45,7 @@ module.exports.remove = async (req, res) => {
   try {
     await Position.remove({ _id: req.params.id });
     res.status(200).json({
-      message: 'Позиция удалена.',
+      message: 'Позиция удалена',
     });
   } catch (e) {
     errorHandler(res, e);
