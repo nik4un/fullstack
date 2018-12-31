@@ -27,3 +27,9 @@ export interface ModalInstance {
   close?(): void;
   destroy?(): void;
 }
+
+export interface Question {
+  crux: string;
+  positive: string;
+  negative: string;
+}

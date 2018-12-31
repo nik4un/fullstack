@@ -8,9 +8,10 @@ import {
   ViewChild
 } from '@angular/core';
 import { PositionService } from '../../../shared/services/position.service';
-import { ModalInstance, Position } from '../../../shared/interfaces';
+import { ModalInstance, Position, Question } from '../../../shared/interfaces';
 import { MaterialService } from '../../../shared/classes/material.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConfirmService } from '../../../shared/components/confirm/confirm.service';
 
 @Component({
   selector: 'app-positions-form',
@@ -21,23 +22,22 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   @Input() categoryId: string;
   @ViewChild('modal') modalRef: ElementRef;
+  @ViewChild('confirm') confirmRef: ElementRef;
+
   positions: Position[] = [];
   loading = false;
   modal: ModalInstance;
   form: FormGroup;
   positionId: string = null;
 
-  constructor(private positionService: PositionService) { }
-
-  formLog() {
-    console.log('Form:', this.form);
-  }
+  constructor(private positionService: PositionService,
+              private confirmService: ConfirmService) { }
 
   private complete() {
     this.modal.close();
     this.form.reset({ name: '', cost: 1 });
     this.form.enable();
-  };
+  }
 
   ngOnInit() {
     this.loading = true;
@@ -90,17 +90,26 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
     // остонавливаем распространение события
     event.stopPropagation();
 
-    const decision = window.confirm(`Удалить позицию «${position.name}»?`);
-    if (decision) {
-      this.positionService.delete(position).subscribe(
-        (res) => {
-          MaterialService.toast(res.message);
-          this.positions = this.positions.filter(p => p._id !== position._id);
-        },
-        (error) => MaterialService.toast('error.error.message'),
-        () => this.complete()
-      );
-    }
+    // Запрос на подтверждение
+    const question: Question = {
+      crux: `Удалить позицию «${position.name}»?`,
+      positive: 'Да, удалить',
+      negative: 'Нет, не удалять'
+    };
+    this.confirmService.confirmThis(question,
+      () => {
+        this.positionService.delete(position).subscribe(
+          (res) => {
+            MaterialService.toast(res.message);
+            this.positions = this.positions.filter(p => p._id !== position._id);
+          },
+          (error) => MaterialService.toast(error.error.message),
+          () => {
+            this.complete();
+          }
+        );
+    },
+      () => null);
   }
 
   onCancel() {
@@ -127,7 +136,7 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
           MaterialService.toast('Позиция успешно изменена');
           this.modal.close();
         },
-        (error) => MaterialService.toast('error.error.message'),
+        (e) => MaterialService.toast(e.error.message),
         () => this.complete()
       );
     } else {
@@ -137,7 +146,7 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
           this.positions.push(position);
           this.modal.close();
         },
-        (error) => MaterialService.toast('error.error.message'),
+        (e) => MaterialService.toast(e.error.message),
         () => this.complete()
       );
     }

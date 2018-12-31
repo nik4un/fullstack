@@ -1,0 +1,25 @@
+<!--<h3>Вопрос: {{ question }}</h3>-->
+<div #modal class="modal">
+  <div class="modal-content">
+    <h5>Внимание!</h5>
+    <p *ngIf="message">{{ message.question.crux }}</p>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      (click)="onCancel()"
+      type="button"
+      class="modal-action waves-effect waves-black btn-flat "
+      *ngIf="message">
+      {{ message.question.negative }}
+    </button>
+    <button
+      (click)="onConfirm()"
+      type="button"
+      class="modal-action waves-effect waves-black btn"
+      *ngIf="message">
+      <i class="material-icons right">delete</i>
+      {{ message.question.positive }}
+    </button>
+  </div>
+</div>

@@ -5,7 +5,8 @@ import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CategoriesService } from '../../shared/services/categories.service';
 import { MaterialService } from '../../shared/classes/material.service';
-import { Category } from '../../shared/interfaces';
+import { Category, Question } from '../../shared/interfaces';
+import { ConfirmService } from '../../shared/components/confirm/confirm.service';
 
 @Component({
   selector: 'app-categories-form',
@@ -23,6 +24,7 @@ export class CategoriesFormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private categoriesService: CategoriesService,
+              private confirmService: ConfirmService,
               private router: Router) { }
 
   ngOnInit() {
@@ -73,7 +75,24 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   deleteCategory() {
-    const decision =
+    // Запрос на подтверждение
+    const question: Question = {
+      crux: `Вы уверены, что хотите удалить категорию «${this.category.name}»?`,
+      positive: 'Уверен, удалить',
+      negative: 'Нет, не удалять'
+    };
+    this.confirmService.confirmThis(question,
+      () => {
+        this.categoriesService.delete(this.category._id)
+          .subscribe(
+            response => MaterialService.toast(response.message),
+            error => MaterialService.toast(error.error.message),
+            () => this.router.navigate(['/categories'])
+          );
+      },
+      () => null);
+
+    /*const decision =
       window.confirm(`Вы уверены, что хотите удалить категорию ${this.category.name}`);
 
     if (decision) {
@@ -83,7 +102,7 @@ export class CategoriesFormComponent implements OnInit {
           error => MaterialService.toast(error.error.message),
           () => this.router.navigate(['/categories'])
         );
-    }
+    }*/
   }
 
   submit() {
