@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServices {
+export class AuthService {
 
   private token = null;
 

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServices } from './shared/services/auth.services';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
-  constructor(private auth: AuthServices) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     const potentialToken = localStorage.getItem('auth-token');

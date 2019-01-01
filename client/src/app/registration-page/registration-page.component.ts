@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../shared/interfaces';
-import { AuthServices } from '../shared/services/auth.services';
+import { AuthService } from '../shared/services/auth.service';
 import { MaterialService } from '../shared/classes/material.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
   authSubscribe: Subscription;
 
   constructor(
-    private auth: AuthServices,
+    private auth: AuthService,
     private router: Router,
     private  route: ActivatedRoute
   ) { }

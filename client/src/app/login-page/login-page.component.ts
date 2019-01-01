@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AuthServices } from '../shared/services/auth.services';
+import { AuthService } from '../shared/services/auth.service';
 import { User } from '../shared/interfaces';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MaterialService } from '../shared/classes/material.service';
@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   authSubscribe: Subscription;
   paramsSubscribe: Subscription;
 
-  constructor(private auth: AuthServices,
+  constructor(private auth: AuthService,
               private router: Router,
               private  route: ActivatedRoute) { }
 

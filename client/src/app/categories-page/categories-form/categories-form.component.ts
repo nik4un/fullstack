@@ -91,18 +91,6 @@ export class CategoriesFormComponent implements OnInit {
           );
       },
       () => null);
-
-    /*const decision =
-      window.confirm(`Вы уверены, что хотите удалить категорию ${this.category.name}`);
-
-    if (decision) {
-      this.categoriesService.delete(this.category._id)
-        .subscribe(
-          response => MaterialService.toast(response.message),
-          error => MaterialService.toast(error.error.message),
-          () => this.router.navigate(['/categories'])
-        );
-    }*/
   }
 
   submit() {

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthServices } from '../../services/auth.services';
+import { AuthService } from '../../services/auth.service';
 import { MaterialService } from '../../classes/material.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class SiteLayoutComponent implements AfterViewInit {
     { url: '/categories', name: 'Ассортимент' }
   ];
 
-  constructor(private auth: AuthServices,
+  constructor(private auth: AuthService,
               private router: Router) { }
 
   ngAfterViewInit(): void {
