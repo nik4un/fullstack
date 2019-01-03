@@ -16,10 +16,11 @@ export interface Category {
 
 export interface Position {
   name: string;
-  cost: Number;
+  cost: number;
   category: string;
   user?: string;
   _id?: string;
+  quantity?: number; // будет использоваться только во фронтенде
 }
 
 export interface ModalInstance {
@@ -33,3 +34,19 @@ export interface Question {
   positive: string;
   negative: string;
 }
+
+export interface Order {
+  date?: Date;
+  order?: number;
+  list: OrderPosition[];
+  user?: string;
+  _id?: string;
+}
+
+export interface OrderPosition {
+  name: string;
+  quantity: number;
+  cost: number;
+  _id?: string;
+}
+
