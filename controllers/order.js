@@ -55,7 +55,7 @@ module.exports.create = async (req, res) => {
       user: req.user._id,
       order: maxOrder + 1,
     }).save();
-    res(201).json(order);
+    res.status(201).json(order);
   } catch (e) {
     errorHandler(res, e);
   }

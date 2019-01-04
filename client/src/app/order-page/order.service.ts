@@ -33,7 +33,6 @@ export class OrderService {
 
   getSum() {
     this.totalCost = this.list.reduce((acc, elem) => acc + elem.cost * elem.quantity, 0);
-    console.log(this.totalCost);
   }
 
   remove(orderPosition: Position) {
@@ -43,6 +42,7 @@ export class OrderService {
   }
 
   clear() {
-
+    this.list = [];
+    this.totalCost = 0;
   }
 }

@@ -49,12 +49,13 @@
     <button
       type="button"
       (click)="cancel()"
+      [disabled]="waiting"
       class="modal-action waves-effect waves-black btn-flat"
     >Отмена</button>
     <button
-      type="submit"
+      type="button"
       (click)="submit()"
-      [disabled]="this.order.list.length === 0"
+      [disabled]="this.order.list.length === 0 || waiting"
       class="modal-action btn waves-effect"
     >Подтвердить</button>
   </div>
