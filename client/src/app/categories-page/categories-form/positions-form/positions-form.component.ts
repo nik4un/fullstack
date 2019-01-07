@@ -8,8 +8,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { PositionService } from '../../../shared/services/position.service';
-import { ModalInstance, Position, Question } from '../../../shared/interfaces';
-import { MaterialService } from '../../../shared/classes/material.service';
+import { Position, Question } from '../../../shared/interfaces';
+import { MaterialService, ModalInstance } from '../../../shared/classes/material.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmService } from '../../../shared/components/confirm/confirm.service';
 
@@ -58,7 +58,7 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngAfterViewInit(): void {
-    this.modal = MaterialService.initModal(this.modalRef.nativeElement);
+    this.modal = MaterialService.initModal(this.modalRef);
     MaterialService.updateTextInput();
   }
 

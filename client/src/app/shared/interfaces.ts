@@ -23,12 +23,6 @@ export interface Position {
   quantity?: number; // будет использоваться только во фронтенде
 }
 
-export interface ModalInstance {
-  open?(): void;
-  close?(): void;
-  destroy?(): void;
-}
-
 export interface Question {
   crux: string;
   positive: string;

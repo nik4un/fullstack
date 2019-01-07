@@ -36,7 +36,7 @@ export class ConfirmComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.modal = MaterialService.initModal(this.modalRef.nativeElement);
+    this.modal = MaterialService.initModal(this.modalRef);
   }
 
   ngOnDestroy(): void {

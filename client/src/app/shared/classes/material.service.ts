@@ -1,7 +1,13 @@
 import { ElementRef } from '@angular/core';
-import { ModalInstance } from '../interfaces';
 
 declare var M;
+
+
+export interface ModalInstance {
+  open?(): void;
+  close?(): void;
+  destroy?(): void;
+}
 
 export class MaterialService {
   static toast(message: string) {
@@ -16,8 +22,12 @@ export class MaterialService {
     M.updateTextFields();
   }
 
-  static initModal(elem): ModalInstance {
-    return M.Modal.init(elem);
+  static initModal(ref: ElementRef): ModalInstance {
+    return M.Modal.init(ref.nativeElement);
+  }
+
+  static initTooltip(ref: ElementRef): ModalInstance {
+    return M.Tooltip.init(ref.nativeElement);
   }
 }
 
