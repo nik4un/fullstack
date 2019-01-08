@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Order } from '../interfaces';
 import { Observable } from 'rxjs';
 
@@ -7,8 +7,15 @@ import { Observable } from 'rxjs';
 export class OrdersService {
   constructor(private http: HttpClient) { }
 
-  fetch() {
-    return this.http.get('/api/order');
+  // для формирования get запроса на получение списка заказов нам необходимо добавить query-параметры для фильтрации
+  // (для пагинации отображения данных)
+  fetch(params: any = {}): Observable<Order[]> {
+    // query-параметры добавляем с помощью класса HttpParams вторым параметром (options) get запроса
+    return this.http.get<Order[]>('/api/order', {
+      params: new HttpParams({
+        fromObject: params
+      })
+    });
   }
 
   create(order: Order): Observable<Order> {

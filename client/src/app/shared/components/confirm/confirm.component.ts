@@ -6,8 +6,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { ModalInstance } from '../../interfaces';
-import { MaterialService } from '../../classes/material.service';
+import { MaterialService, ModalInstance } from '../../classes/material.service';
 import { ConfirmService } from './confirm.service';
 import { Subscription } from 'rxjs';
 

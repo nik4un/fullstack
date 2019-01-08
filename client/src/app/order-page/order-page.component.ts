@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { ModalInstance, Order } from '../shared/interfaces';
-import { MaterialService } from '../shared/classes/material.service';
+import { Order } from '../shared/interfaces';
+import { MaterialService, ModalInstance } from '../shared/classes/material.service';
 import { OrderService } from './order.service';
 import { OrdersService } from '../shared/services/orders.service';
 import { Subscription } from 'rxjs';
@@ -36,7 +36,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.modal = MaterialService.initModal(this.modalRef.nativeElement);
+    this.modal = MaterialService.initModal(this.modalRef);
   }
 
   ngOnDestroy(): void {

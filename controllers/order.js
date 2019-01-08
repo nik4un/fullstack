@@ -6,7 +6,6 @@ module.exports.getAll = async (req, res) => {
   const query = {
     user: req.user._id,
   };
-
   // проверка на наличие начальной даты в запросе
   if (req.query.start) { // req.query.start - это значение "начальная data"
     query.date = {
@@ -33,7 +32,7 @@ module.exports.getAll = async (req, res) => {
       .sort({ date: -1 })
       // + означает приведение к чиловому формату
       .skip(+req.query.offset) // сколько элементов пропустить в найденном массиве
-      .limit(+req.body.query.limit); // сколько элементов отобрать
+      .limit(+req.query.limit); // сколько элементов отобрать
 
     res.status(200).json(order);
   } catch (e) {
