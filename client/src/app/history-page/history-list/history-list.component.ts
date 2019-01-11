@@ -7,7 +7,10 @@ import {
   ViewChild
 } from '@angular/core';
 import { Order } from '../../shared/interfaces';
-import { MaterialService, ModalInstance } from '../../shared/classes/material.service';
+import {
+  MaterialInstance,
+  MaterialService
+} from '../../shared/classes/material.service';
 
 @Component({
   selector: 'app-history-list',
@@ -18,7 +21,7 @@ export class HistoryListComponent implements AfterViewInit, OnDestroy {
 
   @Input() orders: Order[];
   @ViewChild('modal') modalRef: ElementRef;
-  modal: ModalInstance;
+  modal: MaterialInstance;
   selectedOrder: Order;
 
   ngAfterViewInit(): void {

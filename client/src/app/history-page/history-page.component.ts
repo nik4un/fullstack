@@ -1,8 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MaterialService, ModalInstance } from '../shared/classes/material.service';
+import {
+  MaterialInstance,
+  MaterialService
+} from '../shared/classes/material.service';
 import { OrdersService } from '../shared/services/orders.service';
 import { Subscription } from 'rxjs';
-import { Order } from '../shared/interfaces';
+import { Filter, Order } from '../shared/interfaces';
 
 const STEP = 2;
 
@@ -15,8 +18,9 @@ export class HistoryPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('tooltip') tooltipRef: ElementRef;
   isFilterVisible = false;
-  tooltip: ModalInstance;
+  tooltip: MaterialInstance;
   orders: Order[] = [];
+  filter: Filter = {};
   oSub: Subscription;
 
   offset = 0;
@@ -29,10 +33,11 @@ export class HistoryPageComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private ordersService: OrdersService) { }
 
   private fetch() {
-    const params = {
+    const params  = Object.assign({}, this.filter, {
       offset: this.offset,
       limit: this.limit
-    };
+    });
+
     this.oSub = this.ordersService.fetch(params).subscribe(orders => {
       this.orders = this.orders.concat(orders); // добавляем к текущему массиву заказов данные, полученные с сервера
       this.loading = false;
@@ -63,4 +68,15 @@ export class HistoryPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fetch();
   }
 
+  applyFilter(filter: Filter) {
+    this.loading = true;
+    this.orders = [];
+    this.offset = 0;
+    this.filter = filter;
+    this.fetch();
+  }
+
+  isFilterUsed(): boolean {
+    return Object.keys(this.filter).length !== 0;
+  }
 }

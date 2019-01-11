@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { MaterialService, ModalInstance } from '../../classes/material.service';
+import { MaterialService, MaterialInstance } from '../../classes/material.service';
 import { ConfirmService } from './confirm.service';
 import { Subscription } from 'rxjs';
 
@@ -23,7 +23,7 @@ export class ConfirmComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private confirmService: ConfirmService) { }
 
   @ViewChild('modal') modalRef: ElementRef;
-  modal: ModalInstance;
+  modal: MaterialInstance;
 
   ngOnInit() {
     // this function waits for a message from alert service,

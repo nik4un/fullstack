@@ -44,3 +44,10 @@ export interface OrderPosition {
   _id?: string;
 }
 
+// названия полей мы получаем из бекэнда
+export interface Filter {
+  start?: Date;
+  end?: Date;
+  order?: number;
+
+}

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { PositionService } from '../../../shared/services/position.service';
 import { Position, Question } from '../../../shared/interfaces';
-import { MaterialService, ModalInstance } from '../../../shared/classes/material.service';
+import { MaterialService, MaterialInstance } from '../../../shared/classes/material.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmService } from '../../../shared/components/confirm/confirm.service';
 
@@ -26,7 +26,7 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   positions: Position[] = [];
   loading = false;
-  modal: ModalInstance;
+  modal: MaterialInstance;
   form: FormGroup;
   positionId: string = null;
 
