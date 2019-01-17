@@ -64,3 +64,13 @@ export interface OverviewPageItem {
   isHigher: boolean;
 }
 
+export interface AnalyticsPage {
+  average: number;
+  chart: AnalyticsItem[];
+}
+
+export interface AnalyticsItem {
+  label: string;
+  revenue: number;
+  order: number;
+}

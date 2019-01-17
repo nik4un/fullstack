@@ -94,13 +94,13 @@ module.exports.analytics = async (req, res) => {
 
     const average = +(calculateRevenue(allOrders) / Object.keys(ordersMap).length).toFixed(2);
 
-    const chart = Qbject.keys(ordersMap).map(label => {
+    const chart = Object.keys(ordersMap).map((label) => {
       // label - это строка типа '15.01.19'
       const revenue = calculateRevenue(ordersMap[ordersMap]);
-      const order = ordersMap[ordersMap].length;
+      const order = ordersMap[label].length;
 
       return { label, revenue, order };
-    })
+    });
 
     res.status(200).json({ average, chart });
   } catch (e) {
