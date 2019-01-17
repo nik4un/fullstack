@@ -84,6 +84,26 @@ module.exports.overview = async (req, res) => {
   }
 };
 
-module.exports.analytics = (req, res) => {
+module.exports.analytics = async (req, res) => {
+  try {
+    const allOrders = await Order
+      .find({ user: req.user._id })
+      // сортируем по возрастанию даты
+      .sort({ date: 1 });
+    const ordersMap = getOrdersMap(allOrders);
 
+    const average = +(calculateRevenue(allOrders) / Object.keys(ordersMap).length).toFixed(2);
+
+    const chart = Qbject.keys(ordersMap).map(label => {
+      // label - это строка типа '15.01.19'
+      const revenue = calculateRevenue(ordersMap[ordersMap]);
+      const order = ordersMap[ordersMap].length;
+
+      return { label, revenue, order };
+    })
+
+    res.status(200).json({ average, chart });
+  } catch (e) {
+    errorHandler(res, e);
+  }
 };
