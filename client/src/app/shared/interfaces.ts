@@ -51,3 +51,16 @@ export interface Filter {
   order?: number;
 
 }
+
+export interface OverviewPage {
+  revenue: OverviewPageItem;
+  orders;
+}
+
+export interface OverviewPageItem {
+  percent: number;
+  compare: number;
+  yesterday: number;
+  isHigher: boolean;
+}
+

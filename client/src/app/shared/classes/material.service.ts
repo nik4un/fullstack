@@ -41,5 +41,9 @@ export class MaterialService {
       onClose // значение и св-во совпадают
     });
   }
+
+  static initTapTarget(ref: ElementRef): MaterialInstance {
+    return M.TapTarget.init(ref.nativeElement);
+  }
 }
 

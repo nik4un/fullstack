@@ -1,3 +1,4 @@
+const moment = require('moment');
 const Order = require('../models/Order');
 const errorHandler = require('../utils/errorHandler');
 
@@ -19,7 +20,7 @@ module.exports.getAll = async (req, res) => {
     if (!query.date) {
       query.date = {};
     }
-    query.date.$lte = req.query.end; // $lte - означает в mongoose меньше или равно
+    query.date.$lte = moment(req.query.end).add(1, 'd'); // $lte - означает в mongoose меньше или равно
   }
 
   // проверка на наличие номера заказа в запросе

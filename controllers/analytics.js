@@ -63,7 +63,7 @@ module.exports.overview = async (req, res) => {
     // сравнение выручки
     const compareRevenue = (yesterdayRevenue - revenuePerDay).toFixed(2);
     // сравнение кол-ва заказов
-    const compareNumber = (totalNumberOfOrders - ordersPerDay).toFix(2);
+    const compareNumber = (totalNumberOfOrders - ordersPerDay).toFixed(2);
 
     res.status(200).json({
       revenue: {
