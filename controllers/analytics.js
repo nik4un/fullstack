@@ -26,7 +26,7 @@ const getOrdersMap = (orders = []) => {
 
 const calculateRevenue = (orders = []) => orders.reduce((allOrdersSum, order) => {
   const orderSum = order.list
-    .reduce((totalPrice, item) => totalPrice + item.cost * item.quantity, 0);
+    .reduce((totalPrice, item) => totalPrice + (item.cost * item.quantity), 0);
   return allOrdersSum + orderSum;
 }, 0);
 
@@ -90,15 +90,13 @@ module.exports.analytics = async (req, res) => {
       .find({ user: req.user._id })
       // сортируем по возрастанию даты
       .sort({ date: 1 });
+
     const ordersMap = getOrdersMap(allOrders);
-
     const average = +(calculateRevenue(allOrders) / Object.keys(ordersMap).length).toFixed(2);
-
     const chart = Object.keys(ordersMap).map((label) => {
       // label - это строка типа '15.01.19'
-      const revenue = calculateRevenue(ordersMap[ordersMap]);
+      const revenue = calculateRevenue(ordersMap[label]);
       const order = ordersMap[label].length;
-
       return { label, revenue, order };
     });
 
