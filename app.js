@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -37,5 +38,22 @@ app.use('/api/auth', authRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/position', positionRoutes);
+
+/* --- Для production --- */
+// определяем идет ли сборка на production
+// если да, то проделываем следующее
+if (process.env.NODE_ENV === 'production') {
+  // делаем папку, в которвй сбъюлдели клиентскую часть, статической
+  app.use(express.static('client/dist/client'));
+
+  // на любой запрос к серверу отдаем index.html
+  app.get('*', (req, res) => {
+    res.sendFile(
+      // с помощью библиотеки path прописываем путь до файла index.html
+      path.resolve(__dirname, 'client', 'dist', 'client', 'index.html'),
+    );
+  });
+}
+/* --- */
 
 module.exports = app;

@@ -1,5 +1,9 @@
-module.exports = {
-  serverPort: process.env.PORT || 3300,
-  mongoURI: 'mongodb://nik:o123456@ds249873.mlab.com:49873/fullstack',
-  cert: 'dev-jwt', // сертификат для token
-};
+// поскольку все данные приложения беруться из этого файла, здесь будет выбор
+const keysProd = require('./keys.prod');
+const keysDev = require('./keys.dev');
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = keysProd;
+} else {
+  module.exports = keysDev;
+}
