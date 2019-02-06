@@ -54,7 +54,6 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
         this.router.navigate(['/login'], {queryParams: {
           registered: true
           }});
-        console.log('Registration success');
       },
       error => {
         MaterialService.toast(error.error.message);

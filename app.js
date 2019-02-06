@@ -29,6 +29,7 @@ app.use(morgan('dev'));
 // при обращении к папке "uploads" делаем её статической,
 // чтобы сервер мог отдавать файл по запросу браузера
 app.use('/uploads', express.static('uploads'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
