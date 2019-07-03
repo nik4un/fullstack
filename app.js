@@ -17,7 +17,11 @@ const jwtStrategy = require('./middleware/passport');
 const app = express();
 
 // Подключение с базе данных
-mongoose.connect(mongoURI)
+const connectionConfig = {
+  autoIndex: false,
+  useNewUrlParser: true,
+};
+mongoose.connect(mongoURI, connectionConfig)
   .then(() => console.log('MongoDB has been connected!'))
   .catch(error => console.log(error));
 
