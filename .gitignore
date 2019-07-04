@@ -40,3 +40,4 @@ Thumbs.db
 
 # Myself files
 config/keys.dev.js
+.env
